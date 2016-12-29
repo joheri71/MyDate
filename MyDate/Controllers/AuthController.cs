@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using MyDate.Models;
+using MyDate.CustomLibraries;
 
 namespace MyDate.Controllers
 {
@@ -13,56 +14,63 @@ namespace MyDate.Controllers
     {
         // GET: Auth
         [HttpGet]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            var model = new LoginModel
-            {
-                ReturnUrl = returnUrl
-            };
-
-            return View(model);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult LogIn(LoginModel model)
+        public ActionResult Login(Users model)
         {
             if (!ModelState.IsValid) //Kontrollerar att inputformat är korrek.
             {
                 return View(model);
             }
 
-            //detta är bara tillfälligt.
-            if (model.Email == "admin@admin.com" && model.Password == "123456")
+            using (var db = new MainDbContext())
             {
-                var identity = new ClaimsIdentity(new[]
+                var emailCheck = db.Users.FirstOrDefault(u=>u.Email == model.Email);
+                var getPassword = db.Users.Where(u => u.Email == model.Email).Select(u => u.Password);
+                var materializePassword = getPassword.ToList();
+                var password = materializePassword[0];
+                var decryptedPassword = CustomDecrypt.Decrypt(password);
+
+                if (model.Email != null && model.Password == decryptedPassword)
                 {
-                    new Claim(ClaimTypes.Name, "Danne"),
-                    new Claim(ClaimTypes.Email, "danne@email.com"),
-                    new Claim(ClaimTypes.Country, "Sweden")
-                },
+                    var getName = db.Users.Where(u => u.Email == model.Email).Select(u => u.Name);
+                    var materializeName = getName.ToList();
+                    var name = materializeName[0];
+
+                    var getCountry = db.Users.Where(u=>u.Email == model.Email).Select(u=>u.Country);
+                    var materializeCountry = getCountry.ToList();
+                    var country = materializeCountry[0];
+
+                    var getEmail = db.Users.Where(u=>u.Email == model.Email).Select(u=>u.Email);
+                    var materializeEmail = getEmail.ToList();
+                    var email = materializeEmail[0];
+
+
+                    var identity = new ClaimsIdentity(new[]
+                        {
+                            new Claim(ClaimTypes.Name, name),
+                            new Claim(ClaimTypes.Email, email),
+                            new Claim(ClaimTypes.Country, country)
+                        },
                         "ApplicationCookie");
 
-                var ctx = Request.GetOwinContext();
-                var authManager = ctx.Authentication;
+                    var ctx = Request.GetOwinContext();
+                    var authManager = ctx.Authentication;
 
-                authManager.SignIn(identity);
+                    authManager.SignIn(identity);
 
-                return Redirect(GetRedirectUrl(model.ReturnUrl));
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             ModelState.AddModelError("","Invalid email or password");
             return View(model);
         }
 
-        private string GetRedirectUrl(string returnUrl)
-        {
-            if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
-            {
-                return Url.Action("index", "home");
-            }
-
-            return returnUrl;
-        }
 
         public ActionResult Logout()
         {
@@ -71,6 +79,35 @@ namespace MyDate.Controllers
 
             authManager.SignOut("ApplicationCookie");
             return RedirectToAction("Login", "Auth");
+        }
+
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Registration(Users model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new MainDbContext())
+                {
+                    var encryptedPassword = CustomEncrypt.Encrypt(model.Password);
+                    var user = db.Users.Create();
+                    user.Email = model.Email;
+                    user.Password = encryptedPassword;
+                    user.Country = model.Country;
+                    user.Name = model.Name;
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "One or more fields have been");
+            }
+            return View();
         }
     }
 }
