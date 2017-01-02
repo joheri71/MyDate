@@ -31,6 +31,7 @@ namespace MVCdateApp.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -65,6 +66,14 @@ namespace MVCdateApp.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,7 +88,18 @@ namespace MVCdateApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int Age { get; set; }
+
+        public string City { get; set; }
+
+        public string Country { get; set; }
+
+        public bool Sex { get; set; }
+
+        public bool InterestedIn { get; set; }
     }
+
 
     public class ResetPasswordViewModel
     {
@@ -110,3 +130,4 @@ namespace MVCdateApp.Models
         public string Email { get; set; }
     }
 }
+

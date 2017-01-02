@@ -29,5 +29,7 @@ namespace MVCdateApp.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<UserModel> UserModels { get; set; }
     }
 }

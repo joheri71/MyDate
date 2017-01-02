@@ -155,6 +155,21 @@ namespace MVCdateApp.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var db = new ApplicationDbContext();
+                    var userModel = new UserModel
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Age = model.Age,
+                        City = model.City,
+                        Country = model.Country,
+                        Sex = model.Sex,
+                        InterestedIn = model.InterestedIn,
+                        ApplicationUserId = user.Id
+                    };
+                    db.UserModels.Add(userModel);
+                    db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
