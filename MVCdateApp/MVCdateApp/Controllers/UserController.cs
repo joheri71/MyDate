@@ -7,12 +7,22 @@ using MVCdateApp.Models;
 
 namespace MVCdateApp.Controllers
 {
-    public class UserModelController : Controller
+    public class UserController : Controller
     {
         // GET: UserModel
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Profile(int id)
+        {
+          
+            var db = new ApplicationDbContext();
+            var user = db.UserModels.Single(u => u.Id == id);
+
+
+            return View(user);
         }
 
         // GET: UserModel/Details
