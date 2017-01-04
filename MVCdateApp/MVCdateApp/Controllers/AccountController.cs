@@ -12,6 +12,7 @@ using MVCdateApp.Models;
 
 namespace MVCdateApp.Controllers
 {
+    //Kommentar
     [Authorize]
     public class AccountController : Controller
     {
