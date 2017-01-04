@@ -16,7 +16,6 @@ namespace MVCdateApp.Models
             // Add custom user claims here
             return userIdentity;
         }
-
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -32,6 +31,5 @@ namespace MVCdateApp.Models
         }
 
         public DbSet<UserModel> UserModels { get; set; }
-        public DbSet<Message> Messages { get; set; }
     }
 }

@@ -55,8 +55,8 @@ namespace MVCdateApp
             //   consumerSecret: "");
 
             //app.UseFacebookAuthentication(
-            //   appId: "226098841170051",
-            //   appSecret: "a24d5fdfd086b38bfa0da301e1b9bdb9");
+            //   appId: "",
+            //   appSecret: "");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

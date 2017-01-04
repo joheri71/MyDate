@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using MVCdateApp.Models;
 
-
 namespace MVCdateApp.Controllers
 {
     public class UserModelController : Controller
@@ -16,19 +15,12 @@ namespace MVCdateApp.Controllers
             return View();
         }
 
-        public ActionResult Profile()
-        {
-
-
-            return View();
-        }
-
         // GET: UserModel/Details
         public ActionResult Details()
         {
-            var userModel = new UserModel()
+            var userModel = new UserModel
             {
-                FirstName = "TEST",
+                FirstName = "Tord",
                 LastName = "Yvel",
                 Age = 30,
                 Sex = true,
