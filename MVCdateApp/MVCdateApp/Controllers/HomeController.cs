@@ -9,15 +9,15 @@ namespace MVCdateApp.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index()//I body returneras nu 4st slumpade användare
         {
             var context = new ApplicationDbContext();
             var users = new List<UserModel>();
-            var unOrderedUsers = context.UserModels.OrderBy(u => Guid.NewGuid()).ToList();
-            users.Add(unOrderedUsers[0]);
-            users.Add(unOrderedUsers[1]);
-            users.Add(unOrderedUsers[2]);
-            users.Add(unOrderedUsers[3]);
+            var randomUser = context.UserModels.OrderBy(u => Guid.NewGuid()).ToList();
+            users.Add(randomUser[0]);
+            users.Add(randomUser[1]);
+            users.Add(randomUser[2]);
+            users.Add(randomUser[3]);
   
 
 

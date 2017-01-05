@@ -21,29 +21,30 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Edit", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-<div class="container body-content">
-    <!--<div class="row">
-        <div class="col-md-12 jumbotron">
-            <p class="lead">Welcome to OutDated, the fastest way back in the game.</p>
-            <div class="col-sm-2 col-md-6 hero-feature margin-top-5"><a href="~/Account/Register" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-pencil"></span> Register</a></div>
-            <div class="col-sm-2 col-md-6 hero-feature margin-top-5"><a href="~/Account/Login" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-log-in"></span> Log in</a></div>
-            <img src="~/Content/Images/hp-header.png" class="img-responsive center-block"/>
-        </div>
-    </div>-->
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - OutDated</p>
-    </footer>
-</div>
+
+    <!--<div class="container body-content">
+        <div class="row">
+            <div class="col-md-12 jumbotron">
+                <p class="lead">Welcome to OutDated, the fastest way back in the game.</p>
+                <div class="col-sm-2 col-md-6 hero-feature margin-top-5"><a href="~/Account/Register" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-pencil"></span> Register</a></div>
+                <div class="col-sm-2 col-md-6 hero-feature margin-top-5"><a href="~/Account/Login" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-log-in"></span> Log in</a></div>
+                <img src="~/Content/Images/hp-header.png" class="img-responsive center-block"/>
+            </div>
+        </div>-->
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - OutDated</p>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

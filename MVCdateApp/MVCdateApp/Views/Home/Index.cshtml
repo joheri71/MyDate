@@ -1,47 +1,56 @@
 ﻿@using MVCdateApp.Models
 @model IEnumerable<MVCdateApp.Models.UserModel>
-    @{
-        ViewBag.Title = "Home Page";
-    }
-
-    <div class="jumbotron">
-        <h1>OutDated</h1>
-        <p class="lead">Welcome to OutDated, the fastest way back in the game.</p>
-        <div class="col-sm-2 col-md-6 hero-feature margin-top-5"><a href="~/Account/Register" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-pencil"></span> Register</a></div>
-        <div class="col-sm-2 col-md-6 hero-feature margin-top-5"><a href="~/Account/Login" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-log-in"></span> Log in</a></div>
+@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/minIndexJumbotron.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-12 jumbotron">
+        <div class="text-left">
+            <h2>Welcome to</h2>
+            <h1>OutDated</h1>
+            <div class="col-md-2">
+                <a href="~/Account/Register" class="btn btn-primary btn-sm btn-block"><span class="glyphicon glyphicon-pencil"></span> Register</a>
+            </div>
+            <div class="col-md-2">
+                <a href="~/Account/Login" class="btn btn-primary btn-sm btn-block"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="row">
+<div class="row">
 
-        @foreach (UserModel user in Model)
-        {
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <a href="~/Account/Register">
-                        <img src="~/Content/Images/@user.Image" max-height="190" class="img-rounded" alt="Bild">
-                    </a>
-                    <div class="caption">
-                        <h3>@user.FirstName @user.LastName </h3>
-                        @Html.ActionLink("Check out", "Register", "Account", null, new { @class = "btn btn-info" })
-                    </div>
+    @foreach (UserModel user in Model)
+    {
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <a href="~/Account/Register">
+                    <img src="~/Content/Images/@user.Image" max-height="190" class="img-rounded" alt="Bild">
+                </a>
+                <div class="caption">
+                    <h3>@user.FirstName @user.LastName </h3>
+                    @Html.ActionLink("Date me?", "Register", "Account", null, new { @class = "btn btn-info" })
                 </div>
             </div>
-        }
-        @* <div class="col-md-4 margin-top-20"><a href="@Url.Action("Details", "User")" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></div>*@
+        </div>
+    }
+    @* <div class="col-md-4 margin-top-20"><a href="@Url.Action("Details", "User")" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></div>*@
 
 
 
-        @*<div class="col-md-4">
-                <h2>Register</h2>
-                <p>
-                   Open you OutDated account today.
-                </p>
-                <p>@Html.ActionLink("Register", "Register", "Account", null, new {@class="btn btn-default"})</p>
-            </div>
-            <div class="col-md-4">
-                <h2>Log in</h2>
-                <p>Already a member? Access your existing account</p>
-                <p>@Html.ActionLink("Log in", "Login", "Account", null, new { @class = "btn btn-default" })</p>
-            </div>*@
+    @*<div class="col-md-4">
+            <h2>Register</h2>
+            <p>
+               Open you OutDated account today.
+            </p>
+            <p>@Html.ActionLink("Register", "Register", "Account", null, new {@class="btn btn-default"})</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Log in</h2>
+            <p>Already a member? Access your existing account</p>
+            <p>@Html.ActionLink("Log in", "Login", "Account", null, new { @class = "btn btn-default" })</p>
+        </div>*@
 
-    </div>
+</div>
