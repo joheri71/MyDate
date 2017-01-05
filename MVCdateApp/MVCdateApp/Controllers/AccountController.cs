@@ -88,7 +88,9 @@ namespace MVCdateApp.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                   
+                    return RedirectToAction("Profile", "User");
+;
             }
         }
 
@@ -164,6 +166,7 @@ namespace MVCdateApp.Controllers
                         Age = model.Age,
                         City = model.City,
                         Country = model.Country,
+                        Image = "defaultimage.png",
                         Sex = model.Sex,
                         InterestedIn = model.InterestedIn,
                         ApplicationUserId = user.Id

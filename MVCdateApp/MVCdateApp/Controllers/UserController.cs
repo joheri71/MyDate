@@ -25,6 +25,8 @@ namespace MVCdateApp.Controllers
             return View(user);
         }
 
+
+
         // GET: UserModel/Details
         public ActionResult Details()
         {
